@@ -33,7 +33,7 @@ public abstract class MixinSlimeBlock extends TransparentBlock
         }
     }
 
-    @Inject(method = "onEntityLand", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "onEntityLand", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/SlimeBlock;bounce(Lnet/minecraft/entity/Entity;)V"), cancellable = true)
     private void onEntityLand(BlockView world, Entity entity, CallbackInfo ci)
     {
         if (Configs.Disable.DISABLE_SLIME_BLOCK_BOUNCE.getBooleanValue())
