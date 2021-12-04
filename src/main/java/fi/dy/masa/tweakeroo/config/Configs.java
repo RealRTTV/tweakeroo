@@ -269,6 +269,7 @@ public class Configs implements IConfigHandler
         public static final ConfigBooleanHotkeyed       DISABLE_RENDERING_SCAFFOLDING   = new ConfigBooleanHotkeyed("disableRenderingScaffolding",          false, "", "Disables rendering of Scaffolding Blocks");
         public static final ConfigBooleanHotkeyed       DISABLE_RENDER_DISTANCE_FOG     = new ConfigBooleanHotkeyed("disableRenderDistanceFog",             false, "", "Disables the fog that increases around the render distance");
         public static final ConfigBooleanHotkeyed       DISABLE_SCOREBOARD_RENDERING    = new ConfigBooleanHotkeyed("disableScoreboardRendering",           false, "", "Removes the sidebar scoreboard rendering");
+        public static final ConfigBooleanHotkeyed       DISABLE_SHOVEL_PATHING          = new ConfigBooleanHotkeyed("disableShovelPathing",                 false, "", "Disables pathing blocks with an shovel");
         public static final ConfigBooleanHotkeyed       DISABLE_SHULKER_BOX_TOOLTIP     = new ConfigBooleanHotkeyed("disableShulkerBoxTooltip",             false, "", "Disables the vanilla text tooltip for Shulker Box contents");
         public static final ConfigBooleanHotkeyed       DISABLE_SIGN_GUI                = new ConfigBooleanHotkeyed("disableSignGui",                       false, "", "Prevent the Sign edit GUI from opening");
         public static final ConfigBooleanHotkeyed       DISABLE_SLIME_BLOCK_SLOWDOWN    = new ConfigBooleanHotkeyed("disableSlimeBlockSlowdown",            false, "", "Removes the slowdown from walking on Slime Blocks.\n(This is originally from usefulmod by nessie.)");
@@ -307,6 +308,7 @@ public class Configs implements IConfigHandler
                 DISABLE_RENDERING_SCAFFOLDING,
                 DISABLE_RENDER_DISTANCE_FOG,
                 DISABLE_SCOREBOARD_RENDERING,
+                DISABLE_SHOVEL_PATHING,
                 DISABLE_SHULKER_BOX_TOOLTIP,
                 DISABLE_SIGN_GUI,
                 DISABLE_SLIME_BLOCK_SLOWDOWN,

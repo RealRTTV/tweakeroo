@@ -10,11 +10,14 @@ import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import javax.annotation.Nullable;
 import javax.imageio.ImageIO;
+
+import fi.dy.masa.tweakeroo.mixin.IMixinShovelItem;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.MapColor;
 import net.minecraft.block.entity.CommandBlockBlockEntity;
 import net.minecraft.block.entity.SignBlockEntity;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.TameableEntity;
@@ -441,5 +444,11 @@ public class MiscUtils
         {
             InfoUtils.showGuiOrInGameMessage(Message.MessageType.ERROR, "Failed to write image to file: " + fileOut.getAbsolutePath());
         }
+    }
+
+    public static boolean isPathableBlock(World world, BlockPos pos)
+    {
+        BlockState state = world.getBlockState(pos);
+        return IMixinShovelItem.tweakeroo_getPathedBlocks().containsKey(state.getBlock());
     }
 }

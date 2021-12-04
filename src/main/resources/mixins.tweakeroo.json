@@ -10,6 +10,7 @@
 		"IMixinClientWorld",
 		"IMixinCommandBlockExecutor",
 		"IMixinHorseBaseEntity",
+		"IMixinShovelItem",
 		"MixinAbstractClientPlayerEntity",
 		"MixinAbstractInventoryScreen",
 		"MixinBackgroundRenderer",
