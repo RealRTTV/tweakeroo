@@ -1,5 +1,8 @@
 package fi.dy.masa.tweakeroo.mixin;
 
+import fi.dy.masa.malilib.util.PositionUtils;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.math.Vec3d;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -161,6 +164,20 @@ public abstract class MixinClientPlayerInteractionManager
         if (FeatureToggle.TWEAK_FAST_LEFT_CLICK.getBooleanValue())
         {
             cir.setReturnValue(false);
+        }
+    }
+
+    @Inject(method = "breakBlock", at = @At("TAIL"))
+    private void breakBlock(BlockPos pos, CallbackInfoReturnable<Boolean> cir)
+    {
+        MinecraftClient mc = MinecraftClient.getInstance();
+        if (mc.world != null && mc.interactionManager != null && mc.player != null && FeatureToggle.TWEAK_BREAK_REPLACE.getBooleanValue())
+        {
+            Direction facing = PositionUtils.getClosestLookingDirection(mc.player).getOpposite();
+            Vec3d hitVec = PositionUtils.getHitVecCenter(pos, facing);
+            BlockHitResult blockHitResult = new BlockHitResult(hitVec, facing, pos, false);
+
+            mc.interactionManager.interactBlock(mc.player, mc.world, Hand.OFF_HAND, blockHitResult);
         }
     }
 }
