@@ -1,5 +1,6 @@
 package fi.dy.masa.tweakeroo.mixin;
 
+import net.minecraft.world.BlockView;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -28,6 +29,15 @@ public abstract class MixinSlimeBlock extends TransparentBlock
         if (Configs.Disable.DISABLE_SLIME_BLOCK_SLOWDOWN.getBooleanValue() && entityIn instanceof PlayerEntity)
         {
             super.onSteppedOn(worldIn, pos, state, entityIn);
+            ci.cancel();
+        }
+    }
+
+    @Inject(method = "onEntityLand", at = @At("HEAD"), cancellable = true)
+    private void onEntityLand(BlockView world, Entity entity, CallbackInfo ci)
+    {
+        if (Configs.Disable.DISABLE_SLIME_BLOCK_BOUNCE.getBooleanValue())
+        {
             ci.cancel();
         }
     }
