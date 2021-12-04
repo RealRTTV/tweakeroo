@@ -15,6 +15,7 @@
 		"MixinBackgroundRenderer",
 		"MixinBlockEntityRenderDispatcher",
 		"MixinBlockItem",
+		"MixinBossBar",
 		"MixinBuiltChunk",
 		"MixinChatHud",
 		"MixinChatScreen",

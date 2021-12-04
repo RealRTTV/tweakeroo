@@ -246,6 +246,7 @@ public class Configs implements IConfigHandler
         public static final ConfigBooleanHotkeyed       DISABLE_BLOCK_BREAK_PARTICLES   = new ConfigBooleanHotkeyed("disableBlockBreakingParticles",        false, "", "Removes the block breaking particles.\n(This is originally from usefulmod by nessie.)");
         public static final ConfigBooleanHotkeyed       DISABLE_DOUBLE_TAP_SPRINT       = new ConfigBooleanHotkeyed("disableDoubleTapSprint",               false, "", "Disables the double-tap-forward-key sprinting");
         public static final ConfigBooleanHotkeyed       DISABLE_BOSS_FOG                = new ConfigBooleanHotkeyed("disableBossFog",                       false, "", "Removes the fog that boss mobs cause");
+        public static final ConfigBooleanHotkeyed       DISABLE_BOSS_BAR                = new ConfigBooleanHotkeyed("disableBossBar",                       false, "", "Removes the boss bar from the hud");
         public static final ConfigBooleanHotkeyed       DISABLE_CHUNK_RENDERING         = new ConfigBooleanHotkeyed("disableChunkRendering",                false, "", "Disables chunk (re-)rendering. This will make any block changes non-visible\\nuntil this is disabled again and F3 + A is used to refresh the world rendering.\\nThis might help with low fps in places with lots of block changes in some situations,\\nwhere the block changes are not really relevant at that time.");
         public static final ConfigBooleanHotkeyed       DISABLE_CLIENT_ENTITY_UPDATES   = new ConfigBooleanHotkeyed("disableClientEntityUpdates",           false, "", "Disables ALL except player entity updates on the client.\nThis is mainly meant for situations where you need to be\nable to do stuff to fix excessive entity count related problems");
         public static final ConfigBooleanHotkeyed       DISABLE_CLIENT_LIGHT_UPDATES    = new ConfigBooleanHotkeyed("disableClientLightUpdates",            false, "", "Disables all client-side light updates");
@@ -282,6 +283,7 @@ public class Configs implements IConfigHandler
                 DISABLE_BLOCK_BREAK_PARTICLES,
                 DISABLE_DOUBLE_TAP_SPRINT,
                 DISABLE_BOSS_FOG,
+                DISABLE_BOSS_BAR,
                 DISABLE_CHUNK_RENDERING,
                 DISABLE_CLIENT_ENTITY_UPDATES,
                 DISABLE_CLIENT_LIGHT_UPDATES,
