@@ -13,7 +13,8 @@ public class MixinBossBar {
     @Inject(at = @At("HEAD"), method = "render", cancellable = true)
     private void init(MatrixStack matrices, CallbackInfo ci) {
 
-        if (Configs.Disable.DISABLE_BOSS_BAR.getBooleanValue()) {
+        if (Configs.Disable.DISABLE_BOSS_BAR.getBooleanValue())
+        {
             ci.cancel();
         }
     }
