@@ -65,6 +65,7 @@ public class Configs implements IConfigHandler
         public static final ConfigInteger       HOTBAR_SWAP_OVERLAY_OFFSET_Y        = new ConfigInteger     ("hotbarSwapOverlayOffsetY", 4, "The vertical offset of the hotbar swap overlay");
         public static final ConfigInteger       ITEM_SWAP_DURABILITY_THRESHOLD      = new ConfigInteger     ("itemSwapDurabilityThreshold", 20, 5, 10000, "This is the durability threshold (in uses left)\nfor the low-durability item swap feature.\nNote that items with low total durability will go lower\nand be swapped at 5%% left.");
         public static final ConfigInteger       MAP_PREVIEW_SIZE                    = new ConfigInteger     ("mapPreviewSize", 160, 16, 512, "The size of the rendered map previews");
+        public static final ConfigDouble        HEALTH_LOGOUT_THRESHOLD             = new ConfigDouble      ("maximumHealthForLogout", 10, 0, 20, "Threshold to automatically leave the game to not die while AFK");
         public static final ConfigInteger       PERIODIC_ATTACK_INTERVAL            = new ConfigInteger     ("periodicAttackInterval", 20, 0, Integer.MAX_VALUE, "The number of game ticks between automatic attacks (left clicks)");
         public static final ConfigInteger       PERIODIC_USE_INTERVAL               = new ConfigInteger     ("periodicUseInterval", 20, 0, Integer.MAX_VALUE, "The number of game ticks between automatic uses (right clicks)");
         public static final ConfigInteger       PERIODIC_HOLD_ATTACK_DURATION       = new ConfigInteger     ("periodicHoldAttackDuration", 20, 0, Integer.MAX_VALUE, "The number of game ticks to hold down attack");
@@ -147,6 +148,7 @@ public class Configs implements IConfigHandler
                 HOTBAR_SWAP_OVERLAY_OFFSET_Y,
                 ITEM_SWAP_DURABILITY_THRESHOLD,
                 MAP_PREVIEW_SIZE,
+                HEALTH_LOGOUT_THRESHOLD,
                 PERIODIC_ATTACK_INTERVAL,
                 PERIODIC_USE_INTERVAL,
                 PERIODIC_HOLD_ATTACK_DURATION,

@@ -122,6 +122,12 @@ public class MiscTweaks
         {
             CameraEntity.movementTick(player.input.sneaking, player.input.jumping);
         }
+
+        if (mc.player.getHealth() <= (float) Configs.Generic.HEALTH_LOGOUT_THRESHOLD.getDoubleValue() && FeatureToggle.TWEAK_AUTO_LOGOUT.getBooleanValue() && mc.world != null)
+        {
+            mc.world.disconnect();
+        }
+
     }
 
     public static void onGameLoop(MinecraftClient mc)

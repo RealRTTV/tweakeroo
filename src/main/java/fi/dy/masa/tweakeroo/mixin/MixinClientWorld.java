@@ -1,7 +1,15 @@
 package fi.dy.masa.tweakeroo.mixin;
 
+import java.text.SimpleDateFormat;
 import java.util.function.Supplier;
+
+import fi.dy.masa.tweakeroo.config.FeatureToggle;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayNetworkHandler;
+import net.minecraft.text.Text;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -79,6 +87,23 @@ public abstract class MixinClientWorld extends World
     {
         if (Configs.Disable.DISABLE_CHUNK_RENDERING.getBooleanValue())
         {
+            ci.cancel();
+        }
+    }
+
+    @Shadow
+    @Final
+    private ClientPlayNetworkHandler netHandler;
+
+    @Inject(method = "disconnect", at = @At("HEAD"), cancellable = true)
+    private void disconnect(CallbackInfo ci)
+    {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        if (MinecraftClient.getInstance().player != null && FeatureToggle.TWEAK_AUTO_LOGOUT.getBooleanValue() &&
+        MinecraftClient.getInstance().player.getHealth() <= (float) Configs.Generic.HEALTH_LOGOUT_THRESHOLD.getDoubleValue() && MinecraftClient.getInstance().world != null)
+        {
+            this.netHandler.getConnection().disconnect(Text.of("Health logout threshold reached, disconnected at " + sdf.format(System.currentTimeMillis())));
             ci.cancel();
         }
     }
