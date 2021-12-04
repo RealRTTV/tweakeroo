@@ -19,6 +19,10 @@ configFile.withReader {
 	project.ext.config = new ConfigSlurper().parse prop
 }
 
+loom {
+	accessWidenerPath = file("src/main/resources/tweakeroo.accesswidener")
+}
+
 dependencies {
 	minecraft "com.mojang:minecraft:${config.minecraft_version}"
 	mappings "net.fabricmc:yarn:${config.mappings_version}:v2"

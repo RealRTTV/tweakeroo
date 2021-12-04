@@ -1,11 +1,14 @@
 package fi.dy.masa.tweakeroo.mixin;
 
 import java.text.SimpleDateFormat;
+import java.util.Random;
 import java.util.function.Supplier;
 
 import fi.dy.masa.tweakeroo.config.FeatureToggle;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -105,6 +108,15 @@ public abstract class MixinClientWorld extends World
         {
             this.netHandler.getConnection().disconnect(Text.of("Health logout threshold reached, disconnected at " + sdf.format(System.currentTimeMillis())));
             ci.cancel();
+        }
+    }
+
+    @Inject(method = "randomBlockDisplayTick", at = @At("TAIL"))
+    private void randomBlockDisplayTick(int centerX, int centerY, int centerZ, int radius, Random random, ClientWorld.BlockParticle blockParticle, BlockPos.Mutable pos, CallbackInfo ci)
+    {
+        if (FeatureToggle.TWEAK_MOVING_PISTON_INDICATOR.getBooleanValue() && getBlockState(pos).isOf(Blocks.MOVING_PISTON))
+        {
+            this.addParticle(ParticleTypes.LIGHT, pos.getX() + 0.5d, pos.getY() + 0.5d, pos.getZ() + 0.5d, 0.0d, 0.0d, 0.0d);
         }
     }
 }
