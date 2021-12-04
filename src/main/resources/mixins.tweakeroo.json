@@ -17,6 +17,7 @@
 		"MixinBlockItem",
 		"MixinBossBar",
 		"MixinBuiltChunk",
+		"MixinCamera",
 		"MixinChatHud",
 		"MixinChatScreen",
 		"MixinChunkBuilder_BuiltChunk",
