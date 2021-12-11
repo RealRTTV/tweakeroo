@@ -6,6 +6,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import net.minecraft.network.packet.s2c.play.DeathMessageS2CPacket;
 import fi.dy.masa.tweakeroo.Tweakeroo;
+import fi.dy.masa.tweakeroo.config.Configs;
 import fi.dy.masa.tweakeroo.config.FeatureToggle;
 import fi.dy.masa.tweakeroo.tweaks.PlacementTweaks;
 
@@ -33,12 +34,17 @@ public abstract class MixinClientPlayNetworkHandler
         if (FeatureToggle.TWEAK_PRINT_DEATH_COORDINATES.getBooleanValue() && mc.player != null)
         {
             net.minecraft.util.math.BlockPos pos = fi.dy.masa.malilib.util.PositionUtils.getEntityBlockPos(mc.player);
-            String str = String.format("You died @ %d, %d, %d", pos.getX(), pos.getY(), pos.getZ());
-            net.minecraft.text.LiteralText message = new net.minecraft.text.LiteralText(str);
+            StringBuilder sb = new StringBuilder();
+            sb.append(String.format("You died @ %d, %d, %d", pos.getX(), pos.getY(), pos.getZ()));
+            if (Configs.Generic.PRINT_DEATH_DIMENSION.getBooleanValue())
+            {
+                sb.append(String.format(" in %s", mc.world.getRegistryKey().getValue().toString()));
+            }
+            net.minecraft.text.LiteralText message = new net.minecraft.text.LiteralText(sb.toString());
             message.getStyle().withClickEvent(new net.minecraft.text.ClickEvent(net.minecraft.text.ClickEvent.Action.SUGGEST_COMMAND, pos.getX() + " " + pos.getY() + " " + pos.getZ()));
             message.formatted(net.minecraft.util.Formatting.UNDERLINE);
             net.minecraft.client.MinecraftClient.getInstance().inGameHud.getChatHud().addMessage(message);
-            Tweakeroo.logger.info(str);
+            Tweakeroo.logger.info(sb.toString());
         }
     }
 }
