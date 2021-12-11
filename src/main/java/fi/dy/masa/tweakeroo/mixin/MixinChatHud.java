@@ -1,5 +1,8 @@
 package fi.dy.masa.tweakeroo.mixin;
 
+import net.minecraft.text.ClickEvent;
+import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -11,16 +14,22 @@ import fi.dy.masa.tweakeroo.util.MiscUtils;
 public abstract class MixinChatHud extends net.minecraft.client.gui.DrawableHelper
 {
     @ModifyVariable(method = "addMessage(Lnet/minecraft/text/Text;I)V", at = @At("HEAD"), argsOnly = true)
-    private net.minecraft.text.Text addTimestamp(net.minecraft.text.Text componentIn)
+    private Text modifyText(Text componentIn)
     {
+        LiteralText newComponent = new LiteralText("");
         if (FeatureToggle.TWEAK_CHAT_TIMESTAMP.getBooleanValue())
         {
-            net.minecraft.text.LiteralText newComponent = new net.minecraft.text.LiteralText(MiscUtils.getChatTimestamp() + " ");
-            newComponent.append(componentIn);
-            return newComponent;
+            newComponent.append(MiscUtils.getChatTimestamp() + " ");
         }
-
-        return componentIn;
+        if (FeatureToggle.TWEAK_CLICK_TO_COPY_CHAT_MESSAGE.getBooleanValue())
+        {
+                newComponent.append(componentIn).styled(style -> style.withClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, componentIn.getString())));
+        }
+        else
+        {
+            newComponent.append(componentIn);
+        }
+        return newComponent;
     }
 
     @Redirect(method = "render", at = @At(value = "INVOKE",
