@@ -23,7 +23,8 @@ public abstract class MixinChatHud extends net.minecraft.client.gui.DrawableHelp
         }
         if (FeatureToggle.TWEAK_CLICK_TO_COPY_CHAT_MESSAGE.getBooleanValue())
         {
-                newComponent.append(componentIn).styled(style -> style.withClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, componentIn.getString())));
+                newComponent.append(componentIn)
+                        .styled(style -> style.withClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, componentIn.getString())));
         }
         else
         {
