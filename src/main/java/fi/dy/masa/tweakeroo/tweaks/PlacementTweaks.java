@@ -65,6 +65,7 @@ public class PlacementTweaks
     public static final BlockRestriction BLOCK_BREAK_RESTRICTION = new BlockRestriction();
     public static final BlockRestriction FAST_RIGHT_CLICK_BLOCK_RESTRICTION = new BlockRestriction();
     public static final ItemRestriction FAST_RIGHT_CLICK_ITEM_RESTRICTION = new ItemRestriction();
+    public static final ItemRestriction VANILLA_RIGHT_CLICK_RESTRICTION = new ItemRestriction();
     public static final ItemRestriction FAST_PLACEMENT_ITEM_RESTRICTION = new ItemRestriction();
     public static final ItemRestriction HAND_RESTOCK_RESTRICTION = new ItemRestriction();
 
@@ -315,6 +316,11 @@ public class PlacementTweaks
         if (Configs.Disable.DISABLE_SHOVEL_PATHING.getBooleanValue() &&
                 stackPre.getItem() instanceof ShovelItem &&
                 MiscUtils.isPathableBlock(world, hitResult.getBlockPos()))
+        {
+            return ActionResult.PASS;
+        }
+
+        if (canUseItemWithRestriction(VANILLA_RIGHT_CLICK_RESTRICTION, hand, player) == false)
         {
             return ActionResult.PASS;
         }

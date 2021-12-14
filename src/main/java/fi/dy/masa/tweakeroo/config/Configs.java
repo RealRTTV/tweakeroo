@@ -202,6 +202,9 @@ public class Configs implements IConfigHandler
         public static final ConfigOptionList FAST_RIGHT_CLICK_BLOCK_LIST_TYPE   = new ConfigOptionList("fastRightClickBlockListType", ListType.BLACKLIST, "The targeted block restriction type for the Fast Right Click tweak");
         public static final ConfigStringList FAST_RIGHT_CLICK_BLOCK_BLACKLIST   = new ConfigStringList("fastRightClickBlockBlackList", ImmutableList.of("minecraft:chest", "minecraft:ender_chest", "minecraft:trapped_chest", "minecraft:white_shulker_box"), "The blocks that are NOT allowed to be right clicked on with\nthe Fast Right Click tweak, if the fastRightClickBlockListType is set to Black List");
         public static final ConfigStringList FAST_RIGHT_CLICK_BLOCK_WHITELIST   = new ConfigStringList("fastRightClickBlockWhiteList", ImmutableList.of(), "The blocks that are allowed to be right clicked on with\nthe Fast Right Click tweak, if the fastRightClickBlockListType is set to White List");
+        public static final ConfigOptionList VANILLA_RIGHT_CLICK_LIST_TYPE      = new ConfigOptionList("vanillaRightClickListType", ListType.BLACKLIST, "The item using restriction type for Vanilla Right Clicks.");
+        public static final ConfigStringList VANILLA_RIGHT_CLICK_BLACKLIST      = new ConfigStringList("vanillaRightClickBlackList", ImmutableList.of(), "Blacklist for items/blocks that cannot be used with a normal right click.");
+        public static final ConfigStringList VANILLA_RIGHT_CLICK_WHITELIST      = new ConfigStringList("vanillaRightClickWhiteList", ImmutableList.of(), "Whitelist for items/blocks that cannot be used with a normal right click.");
         public static final ConfigOptionList FAST_RIGHT_CLICK_ITEM_LIST_TYPE    = new ConfigOptionList("fastRightClickListType", ListType.NONE, "The item restriction type for the Fast Right Click tweak");
         public static final ConfigStringList FAST_RIGHT_CLICK_ITEM_BLACKLIST    = new ConfigStringList("fastRightClickBlackList", ImmutableList.of("minecraft:firework_rocket"), "The items that are NOT allowed to be used for the Fast Right Click tweak,\nif the fastRightClickListType is set to Black List");
         public static final ConfigStringList FAST_RIGHT_CLICK_ITEM_WHITELIST    = new ConfigStringList("fastRightClickWhiteList", ImmutableList.of("minecraft:bucket", "minecraft:water_bucket", "minecraft:lava_bucket", "minecraft:glass_bottle"), "The items that are allowed to be used for the Fast Right Click tweak,\nif the fastRightClickListType is set to White List");
@@ -228,6 +231,9 @@ public class Configs implements IConfigHandler
                 FAST_PLACEMENT_ITEM_WHITELIST,
                 FAST_RIGHT_CLICK_BLOCK_BLACKLIST,
                 FAST_RIGHT_CLICK_BLOCK_WHITELIST,
+                VANILLA_RIGHT_CLICK_LIST_TYPE,
+                VANILLA_RIGHT_CLICK_BLACKLIST,
+                VANILLA_RIGHT_CLICK_WHITELIST,
                 FAST_RIGHT_CLICK_ITEM_BLACKLIST,
                 FAST_RIGHT_CLICK_ITEM_WHITELIST,
                 FLAT_WORLD_PRESETS,
@@ -398,6 +404,11 @@ public class Configs implements IConfigHandler
         PlacementTweaks.FAST_RIGHT_CLICK_ITEM_RESTRICTION.setListContents(
                 Lists.FAST_RIGHT_CLICK_ITEM_BLACKLIST.getStrings(),
                 Lists.FAST_RIGHT_CLICK_ITEM_WHITELIST.getStrings());
+
+        PlacementTweaks.VANILLA_RIGHT_CLICK_RESTRICTION.setListType((ListType) Lists.VANILLA_RIGHT_CLICK_LIST_TYPE.getOptionListValue());
+        PlacementTweaks.VANILLA_RIGHT_CLICK_RESTRICTION.setListContents(
+                Lists.VANILLA_RIGHT_CLICK_BLACKLIST.getStrings(),
+                Lists.VANILLA_RIGHT_CLICK_WHITELIST.getStrings());
 
         PlacementTweaks.FAST_PLACEMENT_ITEM_RESTRICTION.setListType((ListType) Lists.FAST_PLACEMENT_ITEM_LIST_TYPE.getOptionListValue());
         PlacementTweaks.FAST_PLACEMENT_ITEM_RESTRICTION.setListContents(

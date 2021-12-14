@@ -27,6 +27,9 @@ import fi.dy.masa.tweakeroo.tweaks.PlacementTweaks;
 import fi.dy.masa.tweakeroo.util.CameraUtils;
 import fi.dy.masa.tweakeroo.util.InventoryUtils;
 
+import static fi.dy.masa.tweakeroo.tweaks.PlacementTweaks.VANILLA_RIGHT_CLICK_RESTRICTION;
+import static fi.dy.masa.tweakeroo.tweaks.PlacementTweaks.canUseItemWithRestriction;
+
 @Mixin(ClientPlayerInteractionManager.class)
 public abstract class MixinClientPlayerInteractionManager
 {
@@ -39,7 +42,8 @@ public abstract class MixinClientPlayerInteractionManager
     private void onProcessRightClickFirst(PlayerEntity player, World worldIn, Hand hand, CallbackInfoReturnable<ActionResult> cir)
     {
         if (CameraUtils.shouldPreventPlayerInputs() ||
-            PlacementTweaks.onProcessRightClickPre(player, hand))
+            PlacementTweaks.onProcessRightClickPre(player, hand) ||
+            canUseItemWithRestriction(VANILLA_RIGHT_CLICK_RESTRICTION, hand, player) == false)
         {
             cir.setReturnValue(ActionResult.PASS);
             cir.cancel();
